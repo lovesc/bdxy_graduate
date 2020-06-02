@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sc.dao.NewsDao">	
+	<select id="findByUserName" parameterType="Integer"
+		resultType="cn.sc.pojo.News">
+		select * from bdxy_news where id = #{id}
+	</select>
+	<select id="findlist" parameterType="Map"
+		resultType="cn.sc.pojo.News">
+		select * from bdxy_news where 1=1
+		<if test="newstime !=null">
+			and TO_DAYS(newstime)=TO_DAYS(#{newstime})
+		</if>
+		<if test="newstype !=null and newstype !=''">
+			and newstype=#{newstype}
+		</if>
+		limit #{offset},#{pageSize}
+	</select>
+	<select id="getTotal" parameterType="Map" resultType="Integer">
+		select count(id) from bdxy_news where 1=1
+		<if test="newstime !=null">
+			and TO_DAYS(newstime)=TO_DAYS(#{newstime})
+		</if>
+		<if test="newstype !=null and newstype !=''">
+			and newstype=#{newstype}
+		</if>
+	</select>
+	<update id="add" parameterType="cn.sc.pojo.News">
+		insert into
+		bdxy_news(id,newsname,newscontent,newsfbz,newstime,newstype)
+		values(null,#{newsname},#{newscontent},#{newsfbz},#{newstime},#{newstype})
+	</update>
+	<update id="edit" parameterType="cn.sc.pojo.News">
+		update bdxy_bulletin set newsname=#{newsname},
+		newscontent=#{newscontent},newsfbz=#{newsfbz}
+		,newstime=#{newstime},newstype=#{newstype} where id=#{id}
+	</update>
+	<delete id="delete" parameterType="String">
+		delete from bdxy_news
+		where id in (${value})
+	</delete>
+
+
+</mapper>

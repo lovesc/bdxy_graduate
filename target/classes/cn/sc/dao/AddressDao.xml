@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sc.dao.AddressDao">
+	<select id="findprovince" resultType="String">
+		select province from
+		bdxy_address
+	</select>
+	<select id="findcity" parameterType="String" resultType="String">
+		select city from bdxy_address where province=#{province}
+	</select>
+	<select id="findall" parameterType="String" resultType="cn.sc.pojo.Address">
+		select *from bdxy_address where province=#{province}
+	</select>
+</mapper>

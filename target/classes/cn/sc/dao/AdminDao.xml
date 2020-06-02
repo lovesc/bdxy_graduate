@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sc.dao.AdminDao">
+	<select id="findByUserName" parameterType="String"
+		resultType="cn.sc.pojo.Admin">
+		select * from bdxy_admin where username = #{username}
+	</select>
+	<select id="findList" parameterType="Map"
+		resultType="cn.sc.pojo.Admin">
+		select * from bdxy_admin where 1=1
+		<if test="number !=null and number !=''">
+			and number=#{number}
+		</if>
+		limit #{offset},#{pageSize}
+	</select>
+	<select id="getTotal" parameterType="Map" resultType="Integer">
+		select count(id) from bdxy_admin where number=#{number}
+	</select>
+	<update id="add" parameterType="cn.sc.pojo.Admin">
+		insert into bdxy_admin(id,username,number,password)
+		values(null,#{username},#{number},#{password})
+	</update>
+	<update id="edit" parameterType="cn.sc.pojo.Admin">
+		update bdxy_admin set username=#{username},password=#{password}
+		,number=#{number} where id=#{id}
+	</update>
+	<update id="delete" parameterType="String">
+		delete from bdxy_admin where id in (${value})
+	</update>
+
+</mapper>

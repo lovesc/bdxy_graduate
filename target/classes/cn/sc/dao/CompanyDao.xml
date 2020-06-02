@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sc.dao.CompanyDao">
+	<select id="findByUserName" parameterType="String"
+		resultType="cn.sc.pojo.Company">
+		select * from bdxy_company where name = #{username}
+	</select>
+	<select id="findlist" parameterType="Map"
+		resultType="cn.sc.pojo.Company">
+		select * from bdxy_company where 1=1
+		<if test="name!=null">
+			and name like #{name}
+		</if>
+		<if test="workname!=null">
+			and workname like #{workname}
+		</if>
+		<if test="province !=null ">
+			and province like #{province}
+		</if>
+		<if test="city !=null ">
+			and city like #{city}
+		</if>
+		<if test="type !=null ">
+			and type like #{type}
+		</if>
+		limit #{offset},#{pageSize}
+	</select>
+	<select id="getTotal" parameterType="Map" resultType="Integer">
+		select count(id) from bdxy_company where 1=1
+		<if test="name!=null and name !=''">
+			and name like #{name}
+		</if>
+		<if test="workname!=null">
+			and workname like #{workname}
+		</if>
+		<if test="province !=null ">
+			and province like #{province}
+		</if>
+		<if test="city !=null ">
+			and city like #{city}
+		</if>
+		<if test="type !=null and type !=''">
+			and type like #{type}
+		</if>
+	</select>
+	<insert id="add" parameterType="cn.sc.pojo.Company">
+		insert into
+		bdxy_company (id,name,information,province,city,starttime,endtime,type,email,workname,companyphone)
+		values(null,#{name},#{information},#{province},#{city},#{starttime},#{endtime},#{type},#{email},#{workname},#{companyphone})
+	</insert>
+	<update id="edit" parameterType="cn.sc.pojo.Company">
+		update bdxy_company set
+		name=#{name},information=#{information}
+		,province=#{province},city=#{city},workname=#{workname},companyphone=#{companyphone}
+		,starttime=#{starttime},endtime=#{endtime},type=#{type},email=#{email}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="String">
+		delete from bdxy_company
+		where id in (${value})
+	</delete>
+	<delete id="deletetime">
+		delete from bdxy_company WHERE endtime
+		<![CDATA[ < ]]>
+		now() ;
+	</delete>
+
+
+</mapper>

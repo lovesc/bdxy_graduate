@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sc.dao.StudentDao">
+	<select id="findByUserName" parameterType="String"
+		resultType="cn.sc.pojo.Student">
+		select * from bdxy_student where studentid = #{studentid}
+	</select>
+	<select id="findlist" parameterType="Map"
+		resultType="cn.sc.pojo.Student">
+		select * from bdxy_student where 1=1
+		<if test="studentname !=null and studentname !='' ">
+			and studentname like #{studentname}
+		</if>
+		<if test="state !=null and state !=''">
+			and state=#{state}
+		</if>
+		<if test="studentid !=null and studentid !='' ">
+			and studentid=#{studentid}
+		</if>
+		<if test="number !=null and number !=''">
+			and number=#{number}
+		</if>
+		<if test="type !=null and type !=''">
+			and type=#{type}
+		</if>
+		<if test="role !=null and role !=''">
+			and role=#{role}
+		</if>
+		<if test="province !=null and province !=''">
+			and (province like #{province} or province is NULL)
+		</if>
+		<if test="city !=null and city !=''">
+			and (city like #{city} or city is NULL)
+		</if>
+		limit #{offset},#{pageSize}
+	</select>
+	<select id="getTotal" parameterType="Map" resultType="Integer">
+		select count(id) from bdxy_student where 1=1
+		<if test="studentname !=null and studentname !='' ">
+			and studentname like #{studentname}
+		</if>
+		<if test="state !=null and state !=''">
+			and state=#{state}
+		</if>
+		<if test="studentid !=null and studentid !='' ">
+			and studentid=#{studentid}
+		</if>
+		<if test="number !=null and number !=''">
+			and number=#{number}
+		</if>
+		<if test="type !=null and type !=''">
+			and type=#{type}
+		</if>
+		<if test="role !=null and role !=''">
+			and role=#{role}
+		</if>
+		<if test="province !=null and province !=''">
+			and (province like #{province} or province is NULL)
+		</if>
+		<if test="city !=null and city !=''">
+			and (city like #{city} or city is NULL)
+		</if>
+	</select>
+	<update id="add" parameterType="cn.sc.pojo.Student">
+		insert into
+		bdxy_student (id,studentid,studentname,password,number,sex,state,province,city,workname,
+		name,type,information,track,role,studentphone)
+		values(null,#{studentid},#{studentname},#{password},#{number},#{sex},
+		#{state},#{province},#{city},#{workname},#{name},
+		#{type},#{information},#{track},#{role},#{studentphone})
+	</update>
+	<update id="edit" parameterType="cn.sc.pojo.Student">
+		update bdxy_student set
+		studentid=#{studentid},studentname=#{studentname},password=#{password} ,number=#{number} ,role=#{role}
+		,state=#{state} ,province=#{province},city=#{city},workname=#{workname},name=#{name},sex=#{sex} ,
+		type=#{type} ,information=#{information} ,track=#{track},studentphone=#{studentphone} where id=#{id}
+	</update>
+	<delete id="delete" parameterType="String">
+		delete from bdxy_student
+		where studentid in (${value})
+	</delete>
+</mapper>

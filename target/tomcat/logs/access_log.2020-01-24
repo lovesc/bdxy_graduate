@@ -1,0 +1,8 @@
+0:0:0:0:0:0:0:1 - - [24/Jan/2020:15:27:20 +0800] "GET /login.jsp HTTP/1.1" 200 4459 http-bio-8080-exec-1 176
+0:0:0:0:0:0:0:1 - - [24/Jan/2020:15:27:20 +0800] "GET /static/jquery/date.js HTTP/1.1" 200 4943 http-bio-8080-exec-3 38
+0:0:0:0:0:0:0:1 - - [24/Jan/2020:15:27:20 +0800] "GET /static/layui/css/layui.css HTTP/1.1" 200 80737 http-bio-8080-exec-5 32
+0:0:0:0:0:0:0:1 - - [24/Jan/2020:15:27:20 +0800] "GET /static/login/css/login.css HTTP/1.1" 200 3699 http-bio-8080-exec-4 37
+0:0:0:0:0:0:0:1 - - [24/Jan/2020:15:27:20 +0800] "GET /static/login/images/bdxy.jpg HTTP/1.1" 200 43118 http-bio-8080-exec-7 46
+0:0:0:0:0:0:0:1 - - [24/Jan/2020:15:27:20 +0800] "GET /static/jquery/data_format.js HTTP/1.1" 200 1500 http-bio-8080-exec-2 66
+0:0:0:0:0:0:0:1 - - [24/Jan/2020:15:27:20 +0800] "GET /static/jquery/jquery-3.3.1.min.js HTTP/1.1" 200 86927 http-bio-8080-exec-6 72
+0:0:0:0:0:0:0:1 - - [24/Jan/2020:15:27:20 +0800] "GET /static/login/images/login-bg.jpg HTTP/1.1" 200 415225 http-bio-8080-exec-6 23
